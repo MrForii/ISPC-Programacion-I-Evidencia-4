@@ -95,8 +95,10 @@ __Comando de Ejecución de las Pruebas Unitarias__
 
 - El archivo contiene ademas 5 consultas de tipo SELECT.
 
-<!-- <h2>🚧 Vídeo explicativo de la evidencia </h2>
+<h2>🚧 Vídeo explicativo de la evidencia </h2>
 
-Para una demostración del funcionamiento del programa y una breve explicación sobre la aplicación de los principios de POO y TDD, adjunto link al siguiente video en YouTube: -->
+Para una demostración del funcionamiento del programa y una breve explicación sobre la aplicación de los principios de POO y TDD, adjunto link al siguiente video en YouTube:
+
+[Video explicativo de la evidencia](https://youtu.be/-Hg_Ove1tyc)
 
 
