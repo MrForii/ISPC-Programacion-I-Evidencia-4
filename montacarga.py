@@ -3,11 +3,36 @@ import sys
 
 class Montacarga:
     def __init__(self, pasillo, carga_maxima):
-        self.pasillo = pasillo              # Aqui vamos a indicar la cantidad de pasillos que posee el edificio donde trabaja
-        self.pasillo_actual = 0             # Aqui se indicara el pasillo en el que esta situado el montacarga
-        self.carga_actual = 0               # Aqui indicaremos la carga que posee la montacarga
-        self.carga_maxima = carga_maxima    # Aqui indicaremos la capacidad maxima de la montacarga
-        self.encendido = False              # Aqui indicaremos si la montacarga se encuentra encendida
+        self.__pasillo = pasillo              # Aqui vamos a indicar la cantidad de pasillos que posee el edificio donde trabaja
+        self.__pasillo_actual = 0             # Aqui se indicara el pasillo en el que esta situado el montacarga
+        self.__carga_actual = 0               # Aqui indicaremos la carga que posee la montacarga
+        self.__carga_maxima = carga_maxima    # Aqui indicaremos la capacidad maxima de la montacarga
+        self.__encendido = False              # Aqui indicaremos si la montacarga se encuentra encendida
+
+    # Metodos accesores (getters y setters)
+    def get_pasillo(self):
+        return self.__pasillo
+
+    def get_pasillo_actual(self):
+        return self.__pasillo_actual
+
+    def set_pasillo_actual(self, pasillo_actual):
+        self.__pasillo_actual = pasillo_actual
+
+    def get_carga_actual(self):
+        return self.__carga_actual
+
+    def set_carga_actual(self, carga_actual):
+        self.__carga_actual = carga_actual
+
+    def get_carga_maxima(self):
+        return self.__carga_maxima
+
+    def get_encendido(self):
+        return self.__encendido
+
+    def set_encendido(self, encendido):
+        self.__encendido = encendido
 
     # Metodos a definir:
     # Encender -- Se encarga de encender el motor de la montacarga
@@ -19,37 +44,37 @@ class Montacarga:
 
     def encender(self):
         imprimir_lentamente("🚨 Encendiendo Montacarga...    ✅ Montacarga Encendido!\n", retraso=0.05)
-        self.encendido = True
+        self.set_encendido(True)
 
     def apagar(self):
         imprimir_lentamente("🚨 Apagando Montacarga...    ✅ Montacarga Apagado!\n", retraso=0.05)
-        self.encendido = False
+        self.set_encendido(False)
 
 
     def mover(self, destino):
-        if self.encendido == False:
+        if not self.get_encendido():
             print("❌ Montacarga apagado. Por favor encienda el montacarga para poder moverlo.\n")
          
         # Vamos a comprobar que el usuario no ingrese un numero que sea negativo o mayor al numero total de pasillos
         elif destino < 0: 
             print(f"❌ El destino esta fuera de rango. No se puede mover.\n")
 
-        elif destino >= self.pasillo:
+        elif destino >= self.get_pasillo():
             print(f"❌ El destino esta fuera de rango. No se puede mover.\n")
 
         # Vamos a comprobar que el usuario no quiera mover el montacarga al mismo pasillo en el que esta situado
-        elif destino == self.pasillo_actual:
+        elif destino == self.get_pasillo_actual():
             print(f"❌ El montacarga ya se encuentra en el pasillo {destino}.\n")
 
         else:
             # Si no se cumple lo anterior, entonces el usuario puede mover la montacarga
-            self.pasillo_actual = destino
+            self.set_pasillo_actual(destino)
             imprimir_lentamente("🚨 Moviendo montacarga...\n", retraso=0.05)
             print(f"✅ El montacarga se ha movido al pasillo {destino}.\n")
 
 
     def cargar_montacarga(self, carga):
-        if self.encendido == False:
+        if not self.get_encendido():
             print("❌ Montacarga apagado. Por favor encienda el montacarga para poder cargarlo.\n")
         
         else:
@@ -59,21 +84,19 @@ class Montacarga:
 
             # Vamos a comprobar que el usuario no quiera cargar mas de la capacidad maxima de la montacarga
             else:
-                carga_provisoria = self.carga_actual + carga
-                if carga_provisoria > self.carga_maxima:
-                    print(f"❌ El montacarga no puede cargar {carga} kg. Carga maxima: {self.carga_maxima} kg.\n")
+                carga_provisoria = self.get_carga_actual() + carga
+                if carga_provisoria > self.get_carga_maxima():
+                    print(f"❌ El montacarga no puede cargar {carga} kg. Carga maxima: {self.get_carga_maxima()} kg.\n")
                 
                 else:
                     # Si no se cumple lo anterior, entonces el usuario puede cargar la montacarga
-                    print(self.carga_actual)
-                    print
-                    self.carga_actual = carga_provisoria
+                    self.set_carga_actual(carga_provisoria)
                     imprimir_lentamente("🚨 Cargando Montacarga...\n", retraso=0.05)
-                    print(f"✅ Se han cargado {carga} kg al montacarga. Carga actual: {self.carga_actual} kg.\n")
+                    print(f"✅ Se han cargado {carga} kg al montacarga. Carga actual: {self.get_carga_actual()} kg.\n")
 
 
     def descargar_montacarga(self, carga):
-        if self.encendido == False:
+        if not self.get_encendido():
             print("❌ Montacarga apagado. Por favor encienda el montacarga para poder descargarlo.\n")
         else:
             # Vamos a comprobar que el usuario no ingrese un numero que sea negativo
@@ -81,21 +104,21 @@ class Montacarga:
                 print("❌ El valor de la carga no puede ser negativo. Por favor intente de nuevo.\n")
             else:
                 # Vamos a comprobar que el usuario no quiera descargar mas de la carga que tiene la montacarga
-                if carga > self.carga_actual:
-                    print(f"❌ No hay suficiente carga para descargar {carga} kg. Carga actual: {self.carga_actual} kg.\n")
+                if carga > self.get_carga_actual():
+                    print(f"❌ No hay suficiente carga para descargar {carga} kg. Carga actual: {self.get_carga_actual()} kg.\n")
                 else:
                     # Si no se cumple lo anterior, entonces el usuario puede descargar la montacarga
-                    self.carga_actual -= carga
+                    self.set_carga_actual(self.get_carga_actual() - carga)
                     imprimir_lentamente("🚨 Descargando Montacarga...\n", retraso=0.05)
-                    print(f"✅ Se han descargado {carga} kg del montacarga. Carga actual: {self.carga_actual} kg.\n")
+                    print(f"✅ Se han descargado {carga} kg del montacarga. Carga actual: {self.get_carga_actual()} kg.\n")
 
     def __str__(self):
-        if self.encendido == False:
+        if not self.get_encendido():
             print("🚨 Montacarga apagado. Por favor encienda el montacarga para poder moverlo.")
         else:
             print(f"✅ El montacarga se encuentra encendido.")
-        print(f"🚧 El montacarga se encuentra en el pasillo {self.pasillo_actual}.")
-        print(f"🚧 El montacarga tiene {self.carga_actual} kg de carga.\n")
+        print(f"🚧 El montacarga se encuentra en el pasillo {self.get_pasillo_actual()}.")
+        print(f"🚧 El montacarga tiene {self.get_carga_actual()} kg de carga.\n")
 
 
 """ FUNCIONES PARA ESTILOS DE PYTHON """

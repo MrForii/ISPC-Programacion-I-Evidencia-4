@@ -12,9 +12,9 @@ def montacarga():
 # Desarrollo del test de encendido y apagado del montacarga
 def test_encender_apagar(montacarga):
     montacarga.encender()
-    assert montacarga.encendido is True
+    assert montacarga.get_encendido() is True
     montacarga.apagar()
-    assert montacarga.encendido is False
+    assert montacarga.get_encendido() is False
 
 
 # Desarrollo del test de movimiendo del montacarga.
@@ -31,7 +31,7 @@ def test_mover_montacarga(montacarga,destino, resultado_esperado):
     montacarga.mover(destino)
     montacarga.__str__()
     montacarga.apagar()
-    assert montacarga.pasillo_actual == resultado_esperado
+    assert montacarga.get_pasillo_actual() == resultado_esperado
 
 
 # Desarrollo del test de carga del montacarga
@@ -45,7 +45,7 @@ def test_cargar_montacarga (montacarga, carga, resultado_esperado):
     montacarga.encender()
     montacarga.cargar_montacarga(carga)
     montacarga.__str__()
-    assert montacarga.carga_actual == resultado_esperado
+    assert montacarga.get_carga_actual() == resultado_esperado
 
 
 # Desarrollo del test para descarga del montacarga
@@ -60,6 +60,6 @@ def test_descargar_montacarga(montacarga, descarga, resultado_esperado):
     montacarga.cargar_montacarga(50)    # Establecemos el peso inicial del montacarga al momento del test
     montacarga.descargar_montacarga(descarga)
     montacarga.__str__()
-    assert montacarga.carga_actual == resultado_esperado
+    assert montacarga.get_carga_actual() == resultado_esperado
 
 
