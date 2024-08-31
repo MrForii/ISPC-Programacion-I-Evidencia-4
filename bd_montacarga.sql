@@ -1,3 +1,9 @@
+-- Creamos la base de datos
+
+CREATE DATABASE db_montacarga;
+
+-- Usamos la base de datos
+
 USE montacarga;
 
 -- Creamos la tabla que contendra todos los datos de los montacargas
@@ -26,11 +32,11 @@ INSERT INTO Montacargas (pasillo, pasillo_actual, carga_actual, carga_maxima, en
 
 -- Realizamos 5 consultas SELECT
 
-SELECT * FROM Montacargas
+SELECT * FROM Montacargas;
 
-SELECT * FROM Montacargas WHERE carga_maxima > 100
+SELECT * FROM Montacargas WHERE carga_maxima > 100;
 
-SELECT * FROM Montacargas ORDER BY carga_actual DESC LIMIT 1
+SELECT * FROM Montacargas ORDER BY carga_actual DESC;
 
 SELECT * FROM Montacargas WHERE encendido = TRUE;
 
